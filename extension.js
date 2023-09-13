@@ -4,6 +4,30 @@ const vscode = require( 'vscode' );
 const path = require( 'path' );
 const { exec } = require( 'child_process' );
 
+// -- FUNCTIONS
+
+function getFolderLabel(
+    folderPath
+    )
+{
+    if ( vscode.workspace.workspaceFolders.length > 0 )
+    {
+        let baseFolderPath = vscode.workspace.workspaceFolders[ 0 ].uri.fsPath;
+
+        if ( folderPath === baseFolderPath )
+        {
+            return '.';
+        }
+        else if ( folderPath.startsWith( baseFolderPath + '\\' )
+                  || folderPath.startsWith( baseFolderPath + '/' ) )
+        {
+            return '.' + folderPath.substring( baseFolderPath.length );
+        }
+    }
+
+    return folderPath;
+}
+
 // -- TYPES
 
 class FolderItem
@@ -94,7 +118,7 @@ class FileDataProvider
 
         if ( element )
         {
-            let folderPath = element.label;
+            let folderPath = element.resourceUri.fsPath;
 
             if ( documentArrayByFolderPathMap[ folderPath ] )
             {
@@ -115,7 +139,7 @@ class FileDataProvider
 
             return Promise.resolve(
                 sortedFolderPathArray.map(
-                    ( folderPath ) => new FolderItem( folderPath, vscode.Uri.file( folderPath ) )
+                    ( folderPath ) => new FolderItem( getFolderLabel( folderPath ), vscode.Uri.file( folderPath ) )
                     )
                 );
         }
@@ -196,7 +220,6 @@ function activate(
             () =>fileDataProvider.refresh()
             )
         );
-
 
     let openInExplorer
         = vscode.commands.registerCommand(
