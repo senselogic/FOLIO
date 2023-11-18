@@ -10,18 +10,22 @@ function getFolderLabel(
     folderPath
     )
 {
-    if ( vscode.workspace.workspaceFolders.length > 0 )
+    if ( vscode.workspace.workspaceFolders !== undefined
+         && vscode.workspace.workspaceFolders.length > 0 )
     {
         let baseFolderPath = vscode.workspace.workspaceFolders[ 0 ].uri.fsPath;
 
-        if ( folderPath === baseFolderPath )
+        if ( baseFolderPath !== undefined )
         {
-            return '.';
-        }
-        else if ( folderPath.startsWith( baseFolderPath + '\\' )
-                  || folderPath.startsWith( baseFolderPath + '/' ) )
-        {
-            return '.' + folderPath.substring( baseFolderPath.length );
+            if ( folderPath === baseFolderPath )
+            {
+                return '.';
+            }
+            else if ( folderPath.startsWith( baseFolderPath + '\\' )
+                      || folderPath.startsWith( baseFolderPath + '/' ) )
+            {
+                return '.' + folderPath.substring( baseFolderPath.length );
+            }
         }
     }
 
