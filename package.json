@@ -4,7 +4,7 @@
     "description": "Ordered tab lists by folder",
     "publisher": "SenseLogic",
     "repository": "https://github.com/senselogic/FOLIO.git",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "vscode": "^1.54.0"
     },
@@ -24,18 +24,18 @@
             ]
         },
         "menus": {
-        "view/item/context": [
-            {
-                "command": "extension.openInExplorer",
-                "when": "view == Folio && viewItem == folder",
-                "group": "navigation"
-            },
-            {
-                "command": "extension.openInExplorer",
-                "when": "view == Folio && viewItem == file",
-                "group": "navigation"
-            }
-        ]
+            "view/item/context": [
+                {
+                    "command": "extension.openInExplorer",
+                    "when": "view == Folio && viewItem == folder",
+                    "group": "navigation"
+                },
+                {
+                    "command": "extension.openInExplorer",
+                    "when": "view == Folio && viewItem == file",
+                    "group": "navigation"
+                }
+            ]
         },
         "commands": [
             {
