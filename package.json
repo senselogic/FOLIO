@@ -2,9 +2,10 @@
     "name": "Folio",
     "displayName": "Folio",
     "description": "Ordered tab lists by folder",
+    "icon": "ICON/folio.png",
     "publisher": "SenseLogic",
     "repository": "https://github.com/senselogic/FOLIO.git",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "engines": {
         "vscode": "^1.54.0"
     },
